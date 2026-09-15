@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int index=0;
+        nums[index]=nums[0];
+        int n = nums.size();
+        for(int i=0;i<n;i++){
+            if(nums[index]!=nums[i]){
+                nums[index+1]=nums[i];
+                index++;
+            }
+        }
+        return index+1;
+    }
+};
+// index = 0 → first unique element is at position 0
+
+// Each time a new unique element is found, index++
+
+// So if the last unique element is at index k, the number of unique elements = k + 1
