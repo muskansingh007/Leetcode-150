@@ -1,0 +1,43 @@
+class RandomizedSet {
+public:
+    vector<int> nums;
+    unordered_map<int, int> mp; // value -> index
+
+    RandomizedSet() {
+    }
+
+    bool insert(int val) {
+        if(mp.count(val))
+            return false;
+
+        nums.push_back(val);
+        mp[val] = nums.size() - 1;
+
+        return true;
+    }
+
+    bool remove(int val) {
+        if(!mp.count(val))
+            return false;
+
+        int idx = mp[val];
+        int last = nums.back();
+
+        // Move last element to idx
+        nums[idx] = last;
+        mp[last] = idx;
+
+        // Remove last element
+        nums.pop_back();
+
+        // Remove val from map
+        mp.erase(val);
+
+        return true;
+    }
+
+    int getRandom() {
+        int idx = rand() % nums.size();
+        return nums[idx];
+    }
+};
